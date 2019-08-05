@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Saroj">
+    <link rel="icon" href="favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <title>EREGISTRAR</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">EREGISTRAR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/eregistrar/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/eregistrar/student/list">StudentList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/eregistrar/student/add">Add Student</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div>
+    <h3>Add student:</h3>
+</div>
+<div class="jumbotron">
+    <form id="newStudentForm" method="post" action="/eregistrar/student/update" th:object="${student}">
+        <fieldset>
+            <input type="hidden" name="studentId" th:value="${student.studentId}"/>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="studentNumber">Student Number</label>
+                        <span th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}"
+                              class="alert alert-danger"></span>
+                        <input id="studentNumber" name="studentNumber" type="text" class="form-control"
+                               th:value="${student.studentNumber} " required>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                              class="alert alert-danger"></span>
+                        <input id="firstName" name="firstName" type="text" class="form-control"
+                               th:value="${student.firstName}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="middleName">MiddleName</label>
+                        <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"
+                              class="alert alert-danger"></span>
+                        <input id="middleName" name="middleName" type="text" class="form-control"
+                               th:value="${student.middleName}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastName">LastName</label>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                              class="alert alert-danger"></span>
+                        <input id="lastName" name="lastName" type="text" class="form-control"
+                               th:value="${student.lastName}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cgpa">CGPA</label>
+                        <span th:if="${#fields.hasErrors('cgpa')}" th:errors="*{cgpa}"
+                              class="alert alert-danger"></span>
+                        <input id="cgpa" name="cgpa" type="number" class="form-control"
+                               th:value="${student.cgpa}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="enrollmentDate">Enrollment Date</label>
+                        <span th:if="${#fields.hasErrors('enrollmentDate')}" th:errors="*{enrollmentDate}"
+                              class="alert alert-danger"></span>
+                        <input id="enrollmentDate" name="enrollmentDate" type="date" class="form-control"
+                               th:value="${student.enrollmentDate}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div  class="form-group" type="">
+                        <label for="">Is International</label>
+                        <input type="radio" th:field="${student.international}" name="isInternational" th:value="1" checked>Yes
+                        <input type="radio" th:field ="${student.international}" name="isInternational" th:value="0" >No
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="float:right;">
+                <a href="/eregistrar/student/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update Student</button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+
+
+<footer class="footer">
+    <div class="container" align="center">
+        <span>Saroj</span>
+        <span >&copy; August 2019</span>
+    </div>
+</footer>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
